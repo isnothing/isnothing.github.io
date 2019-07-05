@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+  <title>Tag: nginx | TAJPURE</title>
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width">
+  <meta property="og:type" content="website">
+<meta property="og:title" content="TAJPURE">
+<meta property="og:url" content="https://tajpure.com/tags/nginx/index.html">
+<meta property="og:site_name" content="TAJPURE">
+<meta property="og:locale" content="en">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="TAJPURE">
+  
+    <link rel="alternative" href="/atom.xml" title="TAJPURE" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.ico">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'tajpure@gmail.com']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+
+  <script type="text/javascript" src="/js/material.min.js"></script>
+  <link rel="stylesheet" href="/css/material.min.css" type="text/css">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+</html>
+<body>
+  <div id="container">
+    <div class="mobile-nav-panel">
+	<ul class="nav mdl-menu mdl-js-menu mdl-menu--bottom-left mdl-js-ripple-effect" for="menubtn">
+		<li  class="mdl-menu__item"><a href="/" style="color:#757575">Home</a></li><li  class="mdl-menu__item"><a href="/archives" style="color:#757575">Archives</a></li><li  class="mdl-menu__item"><a href="/about" style="color:#757575">About</a></li>
+		<li  class="mdl-menu__item"><a href="/atom.xml"
+			class="nav-icon" title="RSS Feed" style="color:#757575">RSS</a></li>
+	</ul>
+	<button id="menubtn" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+		<i class="material-icons" role="presentation">menu</i>
+		<span class="visuallyhidden">show menu</span>
+	</button>
+</div>
+<header id="header">
+	<nav class="nav">
+		<ul>
+			<li><a href="/" style="color:#757575">Home</a></li><li><a href="/archives" style="color:#757575">Archives</a></li><li><a href="/about" style="color:#757575">About</a></li>
+			<li><a href="/atom.xml"  class="nav-icon" style="color:#757575" title="RSS Feed">RSS</a></li>
+		</ul>
+	</nav>
+</header>
+
+    <div id="main">
+      
+  
+    <article id="post-ssl-config" class="post mdl-card mdl-shadow--2dp" style="width:100%;">
+	
+	<div class="entry-meta-header date">
+		<time datetime="2015-01-18T04:18:53.000Z" itemprop="datePublished">Jan 18 2015</time>
+
+  </div>
+	<div class="mdl-card__title">
+		
+  
+    <h1 itemprop="name" class="entry-title mdl-card__title-text">
+      <a class="article-title" href="/2015/01/18/ssl-config/">SSL证书的配置</a>
+    </h1>
+  
+
+
+	</div>
+	<div class="mdl-card__supporting-text" style="margin-top: -1em">
+		
+    	<p>今天换VPS, 配置blog时又不免得重新reissue一下我的SSL证书. 记录一下流程, 以作备忘:<br>1,生成证书<br>首先在VPS制作一个private key:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">sudo openssl genrsa -des3 -out server.key 2048</span><br><span class="line">sudo openssl req -new -key server.key -out server.csr</span><br><span class="line"></span><br><span class="line">Country Name (2 letter code) [AU]:CN  #国家代码</span><br><span class="line">State or Province Name (full name) [Some-State]:Beijing #省份</span><br><span class="line">Locality Name (eg, city) []:Beijing  #城市</span><br><span class="line">Organization Name (eg, company) [Internet Widgits Pty Ltd]:Tajpure Ltd #公司名称</span><br><span class="line">Organizational Unit Name (eg, section) []:   #部门名称</span><br><span class="line">Common Name (e.g. server FQDN or YOUR name) []: www.tajpure.com                  </span><br><span class="line">Email Address []: tajpure@gmail.com  #管理员邮箱</span><br></pre></td></tr></table></figure></p>
+<p>在NameCheap上reissue, 填入相关信息,在邮件里获取到证书.<br>获得的证书如下:</p>
+<ul>
+<li>XXX_com.crt</li>
+<li>COMODORSADomainValidationSecureServerCA.crt</li>
+<li>COMODORSAAddTrustCA.crt</li>
+<li>AddTrustExternalCARoot.crt</li>
+</ul>
+<p>2,配置nginx</p>
+<p>将获得的证书合并:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat XXX_com.crt COMODORSADomainValidationSecureServerCA.crt COMODORSAAddTrustCA.crt AddTrustExternalCARoot.crt &gt; XXX_com.crt</span><br></pre></td></tr></table></figure></p>
+<p>如果你在之前生成私钥时设置了pass phase,你需要去掉它:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo cp server.key server.key.com</span><br><span class="line">sudo openssl rsa -in server.key.com -out server.key</span><br></pre></td></tr></table></figure></p>
+<p>在nginx目录添加ssl文件夹,将你的证书XXX_com.crt与私钥server.key全部放入,在nginx.conf中配置如下:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">server &#123;</span><br><span class="line">  listen 443;</span><br><span class="line">  server_name example.com;</span><br><span class="line"></span><br><span class="line">  root /var/www/blog;</span><br><span class="line">  index index.html index.htm;</span><br><span class="line"></span><br><span class="line">  ssl on;</span><br><span class="line">  ssl_certificate /etc/nginx/ssl/server.crt;</span><br><span class="line">  ssl_certificate_key /etc/nginx/ssl/server.key;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>强制使用https可以使用如下配置:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">return 301 https://$server_name$request_uri</span><br></pre></td></tr></table></figure></p>
+
+    
+	</div>
+	
+
+	
+</article>
+
+  
+    <article id="post-CentOS7扩展源" class="post mdl-card mdl-shadow--2dp" style="width:100%;">
+	
+	<div class="entry-meta-header date">
+		<time datetime="2014-11-05T03:44:30.000Z" itemprop="datePublished">Nov 5 2014</time>
+
+  </div>
+	<div class="mdl-card__title">
+		
+  
+    <h1 itemprop="name" class="entry-title mdl-card__title-text">
+      <a class="article-title" href="/2014/11/05/CentOS7扩展源/">CentOS7扩展源</a>
+    </h1>
+  
+
+
+	</div>
+	<div class="mdl-card__supporting-text" style="margin-top: -1em">
+		
+    	<p>一不小心在CentOS7上安装了EPEL6的源,导致nginx一直装不上,报这个错误:<br>Error: Package: nginx-1.6.2-1.el6.ngx.x86_64 (nginx)<br>               Requires: libpcre.so.0()(64bit)<br>应该是源的问题,于是换了一个EPEL7的源,安装方式如下:</p>
+<p>wget “<a href="https://dl.fedoraproject.org/pub/epel/7/x86_64/e/epel-release-7-2.noarch.rpm&quot;" target="_blank" rel="noopener">https://dl.fedoraproject.org/pub/epel/7/x86_64/e/epel-release-7-2.noarch.rpm&quot;</a><br>rpm -ivh epel-release-7-2.noarch.rpm<br>yum repolist all</p>
+<p>再试一下yum install nginx,问题解决.</p>
+
+    
+	</div>
+	
+
+	
+</article>
+
+  
+  
+
+
+    </div>
+    <!-- <div class="mb-search">
+  <form action="//google.com/search" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="Search">
+    <input type="hidden" name="q" value="site:tajpure.com">
+  </form>
+</div> -->
+<footer id="footer">
+	<span class="copyright">
+    &copy; 2012-2019 tajpure<br>
+	</span>
+  <br>
+	<!-- ICON NEEDS FONT AWESOME FOR CHEVRON UP ICON -->
+	<link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
+	<a href="javascript:" id="return-to-top"><i class="icon-chevron-up"></i></a>
+</footer>
+
+    
+<script>
+  var disqus_shortname = 'tajpure';
+  
+  (function(){
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//go.disqus.com/count.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+
+
+<script src="https://www.tajpure.com/js/jquery.min.js"></script>
+
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>
