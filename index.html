@@ -74,7 +74,7 @@
 		
   
     <h1 itemprop="name" class="entry-title mdl-card__title-text">
-      <a class="article-title" href="/2015/11/08/ubuntu-dual-screen/">Ubuntu双显示器</a>
+      <a class="article-title" href="/2015/11/08/ubuntu-dual-screen/">Ubuntu 双显示器</a>
     </h1>
   
 
@@ -82,149 +82,12 @@
 	</div>
 	<div class="mdl-card__supporting-text" style="margin-top: -1em">
 		
-    	<p>前不久在亚马逊上买了一块戴尔的显示器，型号为 U2414 23.8寸，用来作为笔记本的外接显示器用。本来一直觉得Ubuntu使用起来非常简单，各种配置安装也非常方便。 可是终于在外接显示器上遇到了坑,最后经过一段时间的折腾，终于完美地解决了双屏显示的问题。 现在对Linux在某些方面(例如硬件方面的兼容性)的易用性算是有了清楚的认识。 以下是对这次折腾经历的记录，用来给其他遇到相同问题的人作为参考。 我的笔记本型号为 ThinkPad T420，独显为 NVIDIA GeForce GT 520M (GF119M)，系统为 Ubuntu 14.04 64位。</p>
+    	<p>前不久在亚马逊上买了一块戴尔的显示器，型号为 U2414 23.8寸，用来作为笔记本的外接显示器用。本来一直觉得 Ubuntu 使用起来非常简单，各种配置安装也非常方便。 可是终于在外接显示器上遇到了坑,最后经过一段时间的折腾，终于完美地解决了双屏显示的问题。 现在对Linux在某些方面(例如硬件方面的兼容性)的易用性算是有了清楚的认识。 以下是对这次折腾经历的记录，用来给其他遇到相同问题的人作为参考。 我的笔记本型号为 ThinkPad T420，独显为 NVIDIA GeForce GT 520M (GF119M)，系统为 Ubuntu 14.04 64位。</p>
 <p>最开始我使用的是这款显示器自带的一根 DP to Mini DP 的连接线，但是在系统自带的设置里面不能检测到外接显示器，并且外接显示器也一直没有信号输入。为了确定不是连接线的问题，我又买了一根DP to DP的线进行尝试。 但还是检测不到外接显示器。 当我使用 xrandr 命令查看，发现确实能够看到DP的连接信号，但是系统设置里没有外接显示器。 稍微 Google 了一下，发现 Ubuntu 自带的显卡驱动 nouveau 对外接显示器的支持并不好，因此我决定换成 NVIDIA 的闭源驱动试试,在安装 NVIDIA 驱动之后，外接显示器终于有信号了，但是各种花屏比没有信号好不到哪里去。 又 Google 了一番后也没找到什么明确的解决办法。</p>
 <p>最后发现在 BIOS 里将 Display 的 Graphics Device 选项从 NVIDIA Optimus 改成 Discrete Graphics(独立显卡)之后就能用了，完全不知道为什么。 不过之后又出现一个让人不爽的小问题，就是笔记本屏幕的亮度不能修改,并且一直保持最高亮度。 这种情况让我在夜晚不得不关掉笔记本的屏幕，不然会被亮瞎。 这个问题最后在 askubuntu 上找到了解决方案,就是在 /etc/X11/xorg。conf 下为你的笔记本显示器的配置添上如下一行:</p>
 <pre><code>Option &quot;RegistryDwords&quot; &quot;EnableBrightnessControl=1&quot; immediately above EndSection
 </code></pre><p>reboot 之后就可以调整笔记本显示器的亮度了。</p>
 
-    
-	</div>
-	
-
-	
-</article>
-
-  
-    <article id="post-ssl-config" class="post mdl-card mdl-shadow--2dp" style="width:100%;">
-	
-	<div class="entry-meta-header date">
-		<time datetime="2015-01-18T04:18:53.000Z" itemprop="datePublished">Jan 18 2015</time>
-
-  </div>
-	<div class="mdl-card__title">
-		
-  
-    <h1 itemprop="name" class="entry-title mdl-card__title-text">
-      <a class="article-title" href="/2015/01/18/ssl-config/">SSL证书的配置</a>
-    </h1>
-  
-
-
-	</div>
-	<div class="mdl-card__supporting-text" style="margin-top: -1em">
-		
-    	<p>今天换VPS, 配置blog时又不免得重新reissue一下我的SSL证书. 记录一下流程, 以作备忘:<br>1,生成证书<br>首先在VPS制作一个private key:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">sudo openssl genrsa -des3 -out server.key 2048</span><br><span class="line">sudo openssl req -new -key server.key -out server.csr</span><br><span class="line"></span><br><span class="line">Country Name (2 letter code) [AU]:CN  #国家代码</span><br><span class="line">State or Province Name (full name) [Some-State]:Beijing #省份</span><br><span class="line">Locality Name (eg, city) []:Beijing  #城市</span><br><span class="line">Organization Name (eg, company) [Internet Widgits Pty Ltd]:Tajpure Ltd #公司名称</span><br><span class="line">Organizational Unit Name (eg, section) []:   #部门名称</span><br><span class="line">Common Name (e.g. server FQDN or YOUR name) []: www.tajpure.com                  </span><br><span class="line">Email Address []: tajpure@gmail.com  #管理员邮箱</span><br></pre></td></tr></table></figure></p>
-<p>在NameCheap上reissue, 填入相关信息,在邮件里获取到证书.<br>获得的证书如下:</p>
-<ul>
-<li>XXX_com.crt</li>
-<li>COMODORSADomainValidationSecureServerCA.crt</li>
-<li>COMODORSAAddTrustCA.crt</li>
-<li>AddTrustExternalCARoot.crt</li>
-</ul>
-<p>2,配置nginx</p>
-<p>将获得的证书合并:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat XXX_com.crt COMODORSADomainValidationSecureServerCA.crt COMODORSAAddTrustCA.crt AddTrustExternalCARoot.crt &gt; XXX_com.crt</span><br></pre></td></tr></table></figure></p>
-<p>如果你在之前生成私钥时设置了pass phase,你需要去掉它:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo cp server.key server.key.com</span><br><span class="line">sudo openssl rsa -in server.key.com -out server.key</span><br></pre></td></tr></table></figure></p>
-<p>在nginx目录添加ssl文件夹,将你的证书XXX_com.crt与私钥server.key全部放入,在nginx.conf中配置如下:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">server &#123;</span><br><span class="line">  listen 443;</span><br><span class="line">  server_name example.com;</span><br><span class="line"></span><br><span class="line">  root /var/www/blog;</span><br><span class="line">  index index.html index.htm;</span><br><span class="line"></span><br><span class="line">  ssl on;</span><br><span class="line">  ssl_certificate /etc/nginx/ssl/server.crt;</span><br><span class="line">  ssl_certificate_key /etc/nginx/ssl/server.key;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>强制使用https可以使用如下配置:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">return 301 https://$server_name$request_uri</span><br></pre></td></tr></table></figure></p>
-
-    
-	</div>
-	
-
-	
-</article>
-
-  
-    <article id="post-CentOS7扩展源" class="post mdl-card mdl-shadow--2dp" style="width:100%;">
-	
-	<div class="entry-meta-header date">
-		<time datetime="2014-11-05T03:44:30.000Z" itemprop="datePublished">Nov 5 2014</time>
-
-  </div>
-	<div class="mdl-card__title">
-		
-  
-    <h1 itemprop="name" class="entry-title mdl-card__title-text">
-      <a class="article-title" href="/2014/11/05/CentOS7扩展源/">CentOS7扩展源</a>
-    </h1>
-  
-
-
-	</div>
-	<div class="mdl-card__supporting-text" style="margin-top: -1em">
-		
-    	<p>一不小心在CentOS7上安装了EPEL6的源,导致nginx一直装不上,报这个错误:<br>Error: Package: nginx-1.6.2-1.el6.ngx.x86_64 (nginx)<br>               Requires: libpcre.so.0()(64bit)<br>应该是源的问题,于是换了一个EPEL7的源,安装方式如下:</p>
-<p>wget “<a href="https://dl.fedoraproject.org/pub/epel/7/x86_64/e/epel-release-7-2.noarch.rpm&quot;" target="_blank" rel="noopener">https://dl.fedoraproject.org/pub/epel/7/x86_64/e/epel-release-7-2.noarch.rpm&quot;</a><br>rpm -ivh epel-release-7-2.noarch.rpm<br>yum repolist all</p>
-<p>再试一下yum install nginx,问题解决.</p>
-
-    
-	</div>
-	
-
-	
-</article>
-
-  
-    <article id="post-HN-Special,一款Hacker-News的界面优化插件" class="post mdl-card mdl-shadow--2dp" style="width:100%;">
-	
-	<div class="entry-meta-header date">
-		<time datetime="2014-09-09T12:12:36.000Z" itemprop="datePublished">Sep 9 2014</time>
-
-  </div>
-	<div class="mdl-card__title">
-		
-  
-    <h1 itemprop="name" class="entry-title mdl-card__title-text">
-      <a class="article-title" href="/2014/09/09/HN-Special,一款Hacker-News的界面优化插件/">HN Special,一款Hacker News的界面优化插件</a>
-    </h1>
-  
-
-
-	</div>
-	<div class="mdl-card__supporting-text" style="margin-top: -1em">
-		
-			<p>Hacker News作为著名创业孵化器Y Combinator的新闻站点，上面聚集了一大批优秀的程序员与十分优质的内容，可是它的界面实在是不够友好。例如：<br> <img src="../../../../image/HN_before.png" alt="之前"><br>
-			
-				<div class="mdl-card__actions mdl-card--border">
-					<a  class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect"
-					 href="/2014/09/09/HN-Special,一款Hacker-News的界面优化插件/#more">Read More</a>
-			  </div>
-      
-    
-	</div>
-	
-
-	
-</article>
-
-  
-    <article id="post-Vimium的简单试用" class="post mdl-card mdl-shadow--2dp" style="width:100%;">
-	
-	<div class="entry-meta-header date">
-		<time datetime="2014-09-09T12:11:37.000Z" itemprop="datePublished">Sep 9 2014</time>
-
-  </div>
-	<div class="mdl-card__title">
-		
-  
-    <h1 itemprop="name" class="entry-title mdl-card__title-text">
-      <a class="article-title" href="/2014/09/09/Vimium的简单试用/">Vimium的简单试用</a>
-    </h1>
-  
-
-
-	</div>
-	<div class="mdl-card__supporting-text" style="margin-top: -1em">
-		
-			<p>在浏览网页遇到单页很长的页面时，总是觉得食指因为长时间转动鼠标滚球而变得疼痛，而且键盘与鼠标之间的移动无形之中也浪费了很多时间。因此，我想找一个能够让我完全使用键盘来操作浏览器的软件。</p>
-<p>在google了一会之后，我发现chrome下的一款插件能够很好地满足我的要求——Vimium。这款插件可以直接在chrome商店里找到，就不另给地址了。<br>安装好了Vimium之后，便开始简单的使用。<br>
-			
-				<div class="mdl-card__actions mdl-card--border">
-					<a  class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect"
-					 href="/2014/09/09/Vimium的简单试用/#more">Read More</a>
-			  </div>
-      
     
 	</div>
 	
@@ -243,7 +106,7 @@
 		
   
     <h1 itemprop="name" class="entry-title mdl-card__title-text">
-      <a class="article-title" href="/2014/08/30/使用Micorsoft-Visual-Studio入门LLVM/">使用Micorsoft Visual Studio入门LLVM</a>
+      <a class="article-title" href="/2014/08/30/使用Micorsoft-Visual-Studio入门LLVM/">使用 Micorsoft Visual Studio 入门 LLVM</a>
     </h1>
   
 
@@ -257,106 +120,6 @@
 				<div class="mdl-card__actions mdl-card--border">
 					<a  class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect"
 					 href="/2014/08/30/使用Micorsoft-Visual-Studio入门LLVM/#more">Read More</a>
-			  </div>
-      
-    
-	</div>
-	
-
-	
-</article>
-
-  
-    <article id="post-八月二十五日诸事记" class="post mdl-card mdl-shadow--2dp" style="width:100%;">
-	
-	<div class="entry-meta-header date">
-		<time datetime="2014-08-25T12:17:00.000Z" itemprop="datePublished">Aug 25 2014</time>
-
-  </div>
-	<div class="mdl-card__title">
-		
-  
-    <h1 itemprop="name" class="entry-title mdl-card__title-text">
-      <a class="article-title" href="/2014/08/25/八月二十五日诸事记/">八月二十五日诸事记</a>
-    </h1>
-  
-
-
-	</div>
-	<div class="mdl-card__supporting-text" style="margin-top: -1em">
-		
-			<p>第一件事：<br>由于正在参与开发编译器。今天了解了一下LLVM，官方给出的文档比较清晰简单，用来实现定制编译器确实是一个很好的选择。编译号称计算机三大显学之一, 我一直对编译原理很感兴趣,这次可以藉这个机会提高自己对于程序语言的认识。
-			
-				<div class="mdl-card__actions mdl-card--border">
-					<a  class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect"
-					 href="/2014/08/25/八月二十五日诸事记/#more">Read More</a>
-			  </div>
-      
-    
-	</div>
-	
-
-	
-</article>
-
-  
-    <article id="post-博客界面更新" class="post mdl-card mdl-shadow--2dp" style="width:100%;">
-	
-	<div class="entry-meta-header date">
-		<time datetime="2014-07-25T16:04:25.000Z" itemprop="datePublished">Jul 26 2014</time>
-
-  </div>
-	<div class="mdl-card__title">
-		
-  
-    <h1 itemprop="name" class="entry-title mdl-card__title-text">
-      <a class="article-title" href="/2014/07/26/博客界面更新/">博客界面更新</a>
-    </h1>
-  
-
-
-	</div>
-	<div class="mdl-card__supporting-text" style="margin-top: -1em">
-		
-			<p>今天晚上抽了点时间更新了一下博客的界面。简单的白底黑字界面感觉整体上还是十分清爽的，是我想要的风格。看了一下时间，十二点刚过，突然发现今天忘记更新一下longest streak了，呃，好象是昨天了- -||。虽然也没什么要紧，但是好不容易坚持这么多天的东西就这么断掉了，真是有点可惜。下次，再接再厉吧。有点走题了，这篇文应该是对该博客未来设计做一个简单的规划的。<br>
-			
-				<div class="mdl-card__actions mdl-card--border">
-					<a  class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect"
-					 href="/2014/07/26/博客界面更新/#more">Read More</a>
-			  </div>
-      
-    
-	</div>
-	
-
-	
-</article>
-
-  
-    <article id="post-使用JavaParser进行java源码解析" class="post mdl-card mdl-shadow--2dp" style="width:100%;">
-	
-	<div class="entry-meta-header date">
-		<time datetime="2014-02-11T01:25:36.000Z" itemprop="datePublished">Feb 11 2014</time>
-
-  </div>
-	<div class="mdl-card__title">
-		
-  
-    <h1 itemprop="name" class="entry-title mdl-card__title-text">
-      <a class="article-title" href="/2014/02/11/使用JavaParser进行java源码解析/">使用JavaParser进行java源码解析</a>
-    </h1>
-  
-
-
-	</div>
-	<div class="mdl-card__supporting-text" style="margin-top: -1em">
-		
-			<p>  JavaParser下载地址：<a href="http://code.google.com/p/javaparser/downloads/list" target="_blank" rel="noopener">http://code.google.com/p/javaparser/downloads/list</a></p>
-<p>  刚开始接触的时候觉得和JDT里的Parser类不太一样。查了一下WiKi，发现它访问编译单元成员，需要调用相应子元素对应的Visitor类的visit（）方法。此方法可以通过复写来实现自己需要的功能。我需要的功能是将编译单元里的所有MethodDeclaration取出，因此利用传递句柄的方式，实现代码如下：<br>
-			
-				<div class="mdl-card__actions mdl-card--border">
-					<a  class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect"
-					 href="/2014/02/11/使用JavaParser进行java源码解析/#more">Read More</a>
 			  </div>
       
     
@@ -385,10 +148,10 @@
 	</div>
 	<div class="mdl-card__supporting-text" style="margin-top: -1em">
 		
-    	<p>看完少年派之后不得不写一些东西了，酝酿了很久，一直在想这部电影究竟告诉了我些什么。很多人看电影就是仅为娱乐，最能取悦他们的电影价值最高。但我认为电影里承载的思想才是电影的价值所在，真正好的电影是可以为现实中茫然而不知所措的人们指明一条出路的。</p>
+    	<p>看完少年派之后不得不写一些东西了，酝酿了很久，一直在想这部电影究竟告诉了我些什么。很多人看电影就是仅为娱乐，最能取悦他们的电影价值最高。但我认为电影里承载的思想才是电影的价值所在，真正好的电影可以为现实中茫然而不知所措的人们指明一条出路。</p>
 <p>看了很多关于少年派的影评，有大师级深刻入骨分析全片的，也有寥寥数语仅表达自己感慨的。但似乎总是觉得缺点什么，这些影评都似乎太过于着重突出这部电影，反而疏忽了这部电影的受体–观众，从而让人对这部电影的价值不甚明确。</p>
-<p>我看电影时总是喜欢将自己与电影联系起来，在现实与电影中建立起映射，借此反思自己的人生。看少年派时，我总觉得派身上有我自己的影子，挥之不去。儿时的派是一个彻头彻尾的信教徒，而我作为一个无宗教信仰的人，对那时候的派一点感觉也没有，只是一个内心软弱，依靠信仰神灵藉以自慰的人罢了。可当第一次派被他父亲逼着亲眼目睹帕克咬死羚羊的全过程时，我开始想这便是所谓的成长吗？粗暴地打破一个孩子关于世界的美好向往便是让他尽快地成长起来吗？</p>
-<p>当派用蹩脚的英语说着“I’m sorry”。拿着斧子向鬼头鱼砍去时，他彻彻底底地臣服于了现实。现实就是那么残酷，就算寄希望于三相神之一的毗湿奴的梦,它也还是那么残酷。派麻木地吃下一片片鱼肉，虽然这个故事已经经过了派这般的美化，可还是显得那般地残忍。他吃下的是身体赖以生存的肉，而丢下的是自己最为真挚的灵魂。</p>
+<p>我看电影时总是喜欢将自己与电影联系起来，在现实与电影中建立起映射，借此反思自己的人生。看少年派时，我总觉得派身上有我自己的影子，挥之不去。儿时的派是一个彻头彻尾的信教徒，而我作为一个无宗教信仰的人，对那时候的派一点感觉也没有，只是一个内心软弱，依靠信仰神灵藉以自慰的人罢了。可当第一次派被他父亲逼着亲眼目睹帕克咬死羚羊的全过程时，我开始想这便是所谓的成长吗？粗暴地打破一个孩子关于世界的美好向往,便是让他尽快地成长起来吗？</p>
+<p>当派用蹩脚的英语说着“I’m sorry”。拿着斧子向鬼头鱼砍去时，他彻彻底底地臣服于了现实。现实就是那么残酷，就算寄希望于三相神之一的毗湿奴的梦,它也还是那么残酷。派麻木地吃下一片片鱼肉，虽然这个故事已经经过了派这般的美化，可还是显得那般残忍。他吃下的是身体赖以生存的肉，而丢下的是自己最为真挚的灵魂。</p>
 
     
 	</div>

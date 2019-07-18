@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://tajpure.com/"/>
-  <updated>2019-07-11T11:29:57.000Z</updated>
+  <updated>2019-07-18T01:58:17.000Z</updated>
   <id>https://tajpure.com/</id>
   
   <author>
@@ -17,19 +17,19 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>Ubuntu双显示器</title>
+    <title>Ubuntu 双显示器</title>
     <link href="https://tajpure.com/2015/11/08/ubuntu-dual-screen/"/>
     <id>https://tajpure.com/2015/11/08/ubuntu-dual-screen/</id>
     <published>2015-11-08T13:06:27.000Z</published>
-    <updated>2019-07-11T11:29:57.000Z</updated>
+    <updated>2019-07-18T01:58:17.000Z</updated>
     
-    <content type="html"><![CDATA[<p>前不久在亚马逊上买了一块戴尔的显示器，型号为 U2414 23.8寸，用来作为笔记本的外接显示器用。本来一直觉得Ubuntu使用起来非常简单，各种配置安装也非常方便。 可是终于在外接显示器上遇到了坑,最后经过一段时间的折腾，终于完美地解决了双屏显示的问题。 现在对Linux在某些方面(例如硬件方面的兼容性)的易用性算是有了清楚的认识。 以下是对这次折腾经历的记录，用来给其他遇到相同问题的人作为参考。 我的笔记本型号为 ThinkPad T420，独显为 NVIDIA GeForce GT 520M (GF119M)，系统为 Ubuntu 14.04 64位。</p><p>最开始我使用的是这款显示器自带的一根 DP to Mini DP 的连接线，但是在系统自带的设置里面不能检测到外接显示器，并且外接显示器也一直没有信号输入。为了确定不是连接线的问题，我又买了一根DP to DP的线进行尝试。 但还是检测不到外接显示器。 当我使用 xrandr 命令查看，发现确实能够看到DP的连接信号，但是系统设置里没有外接显示器。 稍微 Google 了一下，发现 Ubuntu 自带的显卡驱动 nouveau 对外接显示器的支持并不好，因此我决定换成 NVIDIA 的闭源驱动试试,在安装 NVIDIA 驱动之后，外接显示器终于有信号了，但是各种花屏比没有信号好不到哪里去。 又 Google 了一番后也没找到什么明确的解决办法。</p><p>最后发现在 BIOS 里将 Display 的 Graphics Device 选项从 NVIDIA Optimus 改成 Discrete Graphics(独立显卡)之后就能用了，完全不知道为什么。 不过之后又出现一个让人不爽的小问题，就是笔记本屏幕的亮度不能修改,并且一直保持最高亮度。 这种情况让我在夜晚不得不关掉笔记本的屏幕，不然会被亮瞎。 这个问题最后在 askubuntu 上找到了解决方案,就是在 /etc/X11/xorg。conf 下为你的笔记本显示器的配置添上如下一行:</p><pre><code>Option &quot;RegistryDwords&quot; &quot;EnableBrightnessControl=1&quot; immediately above EndSection</code></pre><p>reboot 之后就可以调整笔记本显示器的亮度了。</p>]]></content>
+    <content type="html"><![CDATA[<p>前不久在亚马逊上买了一块戴尔的显示器，型号为 U2414 23.8寸，用来作为笔记本的外接显示器用。本来一直觉得 Ubuntu 使用起来非常简单，各种配置安装也非常方便。 可是终于在外接显示器上遇到了坑,最后经过一段时间的折腾，终于完美地解决了双屏显示的问题。 现在对Linux在某些方面(例如硬件方面的兼容性)的易用性算是有了清楚的认识。 以下是对这次折腾经历的记录，用来给其他遇到相同问题的人作为参考。 我的笔记本型号为 ThinkPad T420，独显为 NVIDIA GeForce GT 520M (GF119M)，系统为 Ubuntu 14.04 64位。</p><p>最开始我使用的是这款显示器自带的一根 DP to Mini DP 的连接线，但是在系统自带的设置里面不能检测到外接显示器，并且外接显示器也一直没有信号输入。为了确定不是连接线的问题，我又买了一根DP to DP的线进行尝试。 但还是检测不到外接显示器。 当我使用 xrandr 命令查看，发现确实能够看到DP的连接信号，但是系统设置里没有外接显示器。 稍微 Google 了一下，发现 Ubuntu 自带的显卡驱动 nouveau 对外接显示器的支持并不好，因此我决定换成 NVIDIA 的闭源驱动试试,在安装 NVIDIA 驱动之后，外接显示器终于有信号了，但是各种花屏比没有信号好不到哪里去。 又 Google 了一番后也没找到什么明确的解决办法。</p><p>最后发现在 BIOS 里将 Display 的 Graphics Device 选项从 NVIDIA Optimus 改成 Discrete Graphics(独立显卡)之后就能用了，完全不知道为什么。 不过之后又出现一个让人不爽的小问题，就是笔记本屏幕的亮度不能修改,并且一直保持最高亮度。 这种情况让我在夜晚不得不关掉笔记本的屏幕，不然会被亮瞎。 这个问题最后在 askubuntu 上找到了解决方案,就是在 /etc/X11/xorg。conf 下为你的笔记本显示器的配置添上如下一行:</p><pre><code>Option &quot;RegistryDwords&quot; &quot;EnableBrightnessControl=1&quot; immediately above EndSection</code></pre><p>reboot 之后就可以调整笔记本显示器的亮度了。</p>]]></content>
     
     <summary type="html">
     
       
       
-        &lt;p&gt;前不久在亚马逊上买了一块戴尔的显示器，型号为 U2414 23.8寸，用来作为笔记本的外接显示器用。本来一直觉得Ubuntu使用起来非常简单，各种配置安装也非常方便。 可是终于在外接显示器上遇到了坑,最后经过一段时间的折腾，终于完美地解决了双屏显示的问题。 现在对Linux
+        &lt;p&gt;前不久在亚马逊上买了一块戴尔的显示器，型号为 U2414 23.8寸，用来作为笔记本的外接显示器用。本来一直觉得 Ubuntu 使用起来非常简单，各种配置安装也非常方便。 可是终于在外接显示器上遇到了坑,最后经过一段时间的折腾，终于完美地解决了双屏显示的问题。 现在对Lin
       
     
     </summary>
@@ -40,104 +40,13 @@
   </entry>
   
   <entry>
-    <title>SSL证书的配置</title>
-    <link href="https://tajpure.com/2015/01/18/ssl-config/"/>
-    <id>https://tajpure.com/2015/01/18/ssl-config/</id>
-    <published>2015-01-18T04:18:53.000Z</published>
-    <updated>2019-07-05T01:55:22.000Z</updated>
-    
-    <content type="html"><![CDATA[<p>今天换VPS, 配置blog时又不免得重新reissue一下我的SSL证书. 记录一下流程, 以作备忘:<br>1,生成证书<br>首先在VPS制作一个private key:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">sudo openssl genrsa -des3 -out server.key 2048</span><br><span class="line">sudo openssl req -new -key server.key -out server.csr</span><br><span class="line"></span><br><span class="line">Country Name (2 letter code) [AU]:CN  #国家代码</span><br><span class="line">State or Province Name (full name) [Some-State]:Beijing #省份</span><br><span class="line">Locality Name (eg, city) []:Beijing  #城市</span><br><span class="line">Organization Name (eg, company) [Internet Widgits Pty Ltd]:Tajpure Ltd #公司名称</span><br><span class="line">Organizational Unit Name (eg, section) []:   #部门名称</span><br><span class="line">Common Name (e.g. server FQDN or YOUR name) []: www.tajpure.com                  </span><br><span class="line">Email Address []: tajpure@gmail.com  #管理员邮箱</span><br></pre></td></tr></table></figure></p><p>在NameCheap上reissue, 填入相关信息,在邮件里获取到证书.<br>获得的证书如下:</p><ul><li>XXX_com.crt</li><li>COMODORSADomainValidationSecureServerCA.crt</li><li>COMODORSAAddTrustCA.crt</li><li>AddTrustExternalCARoot.crt</li></ul><p>2,配置nginx</p><p>将获得的证书合并:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat XXX_com.crt COMODORSADomainValidationSecureServerCA.crt COMODORSAAddTrustCA.crt AddTrustExternalCARoot.crt &gt; XXX_com.crt</span><br></pre></td></tr></table></figure></p><p>如果你在之前生成私钥时设置了pass phase,你需要去掉它:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo cp server.key server.key.com</span><br><span class="line">sudo openssl rsa -in server.key.com -out server.key</span><br></pre></td></tr></table></figure></p><p>在nginx目录添加ssl文件夹,将你的证书XXX_com.crt与私钥server.key全部放入,在nginx.conf中配置如下:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">server &#123;</span><br><span class="line">  listen 443;</span><br><span class="line">  server_name example.com;</span><br><span class="line"></span><br><span class="line">  root /var/www/blog;</span><br><span class="line">  index index.html index.htm;</span><br><span class="line"></span><br><span class="line">  ssl on;</span><br><span class="line">  ssl_certificate /etc/nginx/ssl/server.crt;</span><br><span class="line">  ssl_certificate_key /etc/nginx/ssl/server.key;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p><p>强制使用https可以使用如下配置:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">return 301 https://$server_name$request_uri</span><br></pre></td></tr></table></figure></p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;今天换VPS, 配置blog时又不免得重新reissue一下我的SSL证书. 记录一下流程, 以作备忘:&lt;br&gt;1,生成证书&lt;br&gt;首先在VPS制作一个private key:&lt;br&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;t
-      
-    
-    </summary>
-    
-    
-      <category term="nginx" scheme="https://tajpure.com/tags/nginx/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>CentOS7扩展源</title>
-    <link href="https://tajpure.com/2014/11/05/CentOS7%E6%89%A9%E5%B1%95%E6%BA%90/"/>
-    <id>https://tajpure.com/2014/11/05/CentOS7扩展源/</id>
-    <published>2014-11-05T03:44:30.000Z</published>
-    <updated>2019-07-05T01:55:22.000Z</updated>
-    
-    <content type="html"><![CDATA[<p>一不小心在CentOS7上安装了EPEL6的源,导致nginx一直装不上,报这个错误:<br>Error: Package: nginx-1.6.2-1.el6.ngx.x86_64 (nginx)<br>               Requires: libpcre.so.0()(64bit)<br>应该是源的问题,于是换了一个EPEL7的源,安装方式如下:</p><p>wget “<a href="https://dl.fedoraproject.org/pub/epel/7/x86_64/e/epel-release-7-2.noarch.rpm&quot;" target="_blank" rel="noopener">https://dl.fedoraproject.org/pub/epel/7/x86_64/e/epel-release-7-2.noarch.rpm&quot;</a><br>rpm -ivh epel-release-7-2.noarch.rpm<br>yum repolist all</p><p>再试一下yum install nginx,问题解决.</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;一不小心在CentOS7上安装了EPEL6的源,导致nginx一直装不上,报这个错误:&lt;br&gt;Error: Package: nginx-1.6.2-1.el6.ngx.x86_64 (nginx)&lt;br&gt;               Requires: libpcre.s
-      
-    
-    </summary>
-    
-    
-      <category term="linux" scheme="https://tajpure.com/tags/linux/"/>
-    
-      <category term="nginx" scheme="https://tajpure.com/tags/nginx/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>HN Special,一款Hacker News的界面优化插件</title>
-    <link href="https://tajpure.com/2014/09/09/HN-Special,%E4%B8%80%E6%AC%BEHacker-News%E7%9A%84%E7%95%8C%E9%9D%A2%E4%BC%98%E5%8C%96%E6%8F%92%E4%BB%B6/"/>
-    <id>https://tajpure.com/2014/09/09/HN-Special,一款Hacker-News的界面优化插件/</id>
-    <published>2014-09-09T12:12:36.000Z</published>
-    <updated>2019-07-05T01:55:22.000Z</updated>
-    
-    <content type="html"><![CDATA[<p>Hacker News作为著名创业孵化器Y Combinator的新闻站点，上面聚集了一大批优秀的程序员与十分优质的内容，可是它的界面实在是不够友好。例如：<br> <img src="../../../../image/HN_before.png" alt="之前"><br><a id="more"></a></p><p>由于内容全部堆积在一起，使用浏览器查看时觉得十分沉重，体验不好。为了解决这个问题，我觉得可以利用浏览器插件对其界面进行优化。于是下意识的搜索了相应的插件，于是发现了这个：HN Special，这个插件十分好用，作者添加的特性如下：</p><ul><li>A modern looking visual theme</li><li>Infinite scrolling</li><li>Open links in new tab</li><li>More accurate domain names</li><li>Comment folding</li><li>Mark as read</li><li>Sticky header</li><li>Grey visited links</li><li>User information tooltips</li></ul><p>使用该插件之后的界面：<br> <img src="../../../../image/HN_after.png" alt="之后"></p><p>界面清爽了很多，另外发现该作者竟然也是风靡全球的游戏”2048”的作者（Gabriele Cirulli），并且还非常年轻。</p>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;Hacker News作为著名创业孵化器Y Combinator的新闻站点，上面聚集了一大批优秀的程序员与十分优质的内容，可是它的界面实在是不够友好。例如：&lt;br&gt; &lt;img src=&quot;../../../../image/HN_before.png&quot; alt=&quot;之前&quot;&gt;&lt;br&gt;
-    
-    </summary>
-    
-    
-      <category term="chrome插件" scheme="https://tajpure.com/tags/chrome%E6%8F%92%E4%BB%B6/"/>
-    
-      <category term="Hacker News" scheme="https://tajpure.com/tags/Hacker-News/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Vimium的简单试用</title>
-    <link href="https://tajpure.com/2014/09/09/Vimium%E7%9A%84%E7%AE%80%E5%8D%95%E8%AF%95%E7%94%A8/"/>
-    <id>https://tajpure.com/2014/09/09/Vimium的简单试用/</id>
-    <published>2014-09-09T12:11:37.000Z</published>
-    <updated>2019-07-05T01:55:22.000Z</updated>
-    
-    <content type="html"><![CDATA[<p>在浏览网页遇到单页很长的页面时，总是觉得食指因为长时间转动鼠标滚球而变得疼痛，而且键盘与鼠标之间的移动无形之中也浪费了很多时间。因此，我想找一个能够让我完全使用键盘来操作浏览器的软件。</p><p>在google了一会之后，我发现chrome下的一款插件能够很好地满足我的要求——Vimium。这款插件可以直接在chrome商店里找到，就不另给地址了。<br>安装好了Vimium之后，便开始简单的使用。<br><a id="more"></a></p><p>首先是了解一些基础的组合键功能，大致的清单如下：<br><img src="../../../../image/vimium_keyboard.png" alt="keyboard"></p><p>其中类似<c-u>键指的是ctrl+u键，和vim中的表示一样</c-u></p><p>这些功能基本上能够让我完全脱离鼠标了，下面是一张使用时的截图：</p><p><img src="../../../../image/vimium_screenshot.png" alt="screenshot"></p><p>想跳转至哪个链接，直接在键盘输入相应的字符就可以了。推荐在vimium配置中，将用于链接的提示字符(Characters used for link hints)中的f替换成y或者其他提示字符串中没有的字符，这样你就可以按一下f出现链接提示字符再按一下取消，便于操作。</p><p>使用Vimium之后浏览网页就不再需要鼠标了，不过好像只有firefox与chrome支持类似的插件，其它浏览器就不知道了。</p>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;在浏览网页遇到单页很长的页面时，总是觉得食指因为长时间转动鼠标滚球而变得疼痛，而且键盘与鼠标之间的移动无形之中也浪费了很多时间。因此，我想找一个能够让我完全使用键盘来操作浏览器的软件。&lt;/p&gt;
-&lt;p&gt;在google了一会之后，我发现chrome下的一款插件能够很好地满足我的要求——Vimium。这款插件可以直接在chrome商店里找到，就不另给地址了。&lt;br&gt;安装好了Vimium之后，便开始简单的使用。&lt;br&gt;
-    
-    </summary>
-    
-    
-      <category term="chrome插件" scheme="https://tajpure.com/tags/chrome%E6%8F%92%E4%BB%B6/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>使用Micorsoft Visual Studio入门LLVM</title>
+    <title>使用 Micorsoft Visual Studio 入门 LLVM</title>
     <link href="https://tajpure.com/2014/08/30/%E4%BD%BF%E7%94%A8Micorsoft-Visual-Studio%E5%85%A5%E9%97%A8LLVM/"/>
     <id>https://tajpure.com/2014/08/30/使用Micorsoft-Visual-Studio入门LLVM/</id>
     <published>2014-08-29T16:03:55.000Z</published>
-    <updated>2019-07-05T01:55:22.000Z</updated>
+    <updated>2019-07-18T01:57:59.000Z</updated>
     
-    <content type="html"><![CDATA[<p>这是一篇关于如何在Windows平台下使用LLVM的文章，由tajpure转述自 <a href="http://llvm.org/docs/GettingStartedVS.html#id2" target="_blank" rel="noopener">LLVM官网</a>.</p><p>##概述##<br>LLVM，命名最早取自底层虚拟机器（Low Level Virtual Machine）的缩写。由很多项目组成，它是一个编译器的基础框架，提供完整的编译系统中间层。使用Visual Studio而不是使用mingw或cygwin来编译LLVM。这是因为vc能编译出更原生的程序，只依赖于VC的dll。<br><a id="more"></a></p><p>##依赖##<br>在你开始使用LLVM系统时，你需要看一下如下依赖。提前了解你需要的硬件和软件，会使你的麻烦减少。</p><p>###硬件要求###</p><p>1、一个能够良好运行Visual Studio2012的系统</p><p>2、LLVM的安装将会占用3GB左右的空间</p><p>###软件要求###</p><p>1、Visual Studio 2012及更高版本</p><p>2、<a href="http://www.cmake.org/" target="_blank" rel="noopener">CMake</a>，用它来产生LLVM最新的项目文件</p><p>3、如果你想运行LLVM测试文件，你需要安装<a href="http://www.python.org/" target="_blank" rel="noopener">Python</a>（2.4-2.7版本测试可运行）、<a href="http://gnuwin32.sourceforge.net/" target="_blank" rel="noopener">DnuWin32</a></p><p>4、不要安装LLVM在目录名包含空格的目录下，这会导致配置失败</p><p>##开始##<br>下面是快速开始使用LLVM的一份简短实例：</p><p>1、阅读文档</p><p>2、认真地再读一遍文档</p><p>3、记住你已经被两次提醒去阅读文档</p><p>4、获取LLVM源码</p><ul><li>通过下载的文件获取<ul><li>cd <where-you-want-llvm-to-live></where-you-want-llvm-to-live></li><li>gunzip –stdout llvm-VERSION.tar.gz | tar -xvf -(or use WinZip)</li><li>cd llvm</li></ul></li><li>通过匿名SVN获取<ul><li>cd <where-you-want-llvm-to-live></where-you-want-llvm-to-live></li><li>svn co <a href="http://llvm.org/svn/llvm-project/llvm/trunk" target="_blank" rel="noopener">http://llvm.org/svn/llvm-project/llvm/trunk</a> llvm</li><li>cd llvm </li></ul></li><li>通过Git获取<ul><li>cd <where-you-want-llvm-to-live></where-you-want-llvm-to-live></li><li>git clone <a href="http://llvm.org/git/llvm.git" target="_blank" rel="noopener">http://llvm.org/git/llvm.git</a></li></ul></li></ul><p>5、使用CMake产生LLVM最新的项目文件：</p><ul><li><p>CMake安装完成后。CMake最简单的使用方法是通过CMake的图形界面使用。你可以选择一个目录，将LLVM解压到其中（推荐使用默认选项）。</p></li><li><p>查看<a href="http://llvm.org/docs/CMake.html" target="_blank" rel="noopener">LLVM CMake 导航</a>获取更多信息关于如何去配置LLVM编译</p></li><li><p>CMake为所有的构建类型产生项目文件。要选择一个特殊的构建类型，你可以使用VS IDE的配置管理器，或者当使用MSBuild时，你也可以使用/property:Configuration 命令行选项。</p></li></ul><p>6、启动 Visual Studio</p><ul><li>在你所创建的项目文件中，你会发现llvm.sln，双击它打开Visual Studio</li></ul><p>7、编译LLVM组件</p><ul><li><p>这个项目可能会仍然可能会被单独构建，但构建他们时不要仅仅选择让他们全部批量构建，而是选择并且构建需要全部构建的项目去全部构建。</p></li><li><p>Fibonacci项目是一个使用JIT的例子程序。修改项目的调试属性去提供一个数字化的命令行参数或者在命令行里运行它。这个程序将会打印绑定的fibonacci值</p></li></ul><p>8、在 Visual Studio 里测试LLVM</p><ul><li><p>如果%PATH%不包含CnuWin32，你能够在CMake上指定 LLVM_LIT_TOOLS_DIR 作为给GnuWin32的路径</p></li><li><p>你能够仅仅在构建项目“check”时运行LLVM 测试。测试结果将会展示在VS的输出窗口里。</p></li></ul><p>9、在命令行里测试LLVM</p><ul><li>LLVM测试能够运行通过改变目录至LLVM源码目录并运行如下命令：</li></ul><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">C:\..\llvm&gt; python ..\build\bin\llvm-lit --param build_config=Win32 --param build_mode=Debug --param llvm_site_config=../build/test/lit.site.cfg test</span><br></pre></td></tr></table></figure><p>上述例子假定Python已经在你的Path变量里了，你已经构建了一个LLVM的Win32调试版本通过一个行构建的标准输出。你不会看到任何不可预见的失败提示，但是会看到许多不支持测试和可预见的失败提示。<br>一个特殊的测试或测试目录能够被运行如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">C:\..\llvm&gt; python ..\build\bin\llvm-lit --param build_config=Win32 --param build_mode=Debug --param llvm_site_config=../build/test/lit.site.cfg test/path/to/test</span><br></pre></td></tr></table></figure></p><p>##一个使用LLVM工具链的示例##</p><p>1、首先，创建一个简单的C文件，命名为’hello.c’</p><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">"hello world\n"</span>);</span><br><span class="line"><span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>2、接着，将这个C文件编译为LLVM字节码文件</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">C:\..&gt; clang -c hello.c -emit-llvm -o hello.bc</span><br></pre></td></tr></table></figure><p>这样将会创建一个结果文件hello.bc。你能够直接使用lli工具执行这个文件，llc工具编译它成为本地汇编代码，优化它通过opt工具，等等。<br>另外，你能够直接输出一个可执行文件通过clang：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">C:\..&gt; clang hello.c -o hello.exe</span><br></pre></td></tr></table></figure></p><p>3、使用实时编译器运行程序：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">C:\..&gt; lli hello.bc</span><br></pre></td></tr></table></figure></p><p>4、使用llvm-dis实用工具去查看LLVM汇编代码：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">C:\..&gt; llvm-dis &lt; hello.bc | more</span><br></pre></td></tr></table></figure></p><p>5、使用LLC代码生成器编译程序成object code<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">C:\..&gt; llc -filetype=obj hello.bc</span><br></pre></td></tr></table></figure></p><p>6、使用Microsoft链接链接成二进制：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">C:\..&gt; link hello.obj -defaultlib:libcmt</span><br></pre></td></tr></table></figure></p><p>7、执行可执行程序：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">C:\..&gt; hello.exe</span><br></pre></td></tr></table></figure></p><p>##链接##</p><ul><li><a href="http://llvm.org/" target="_blank" rel="noopener">LLVM homepage</a></li><li><a href="http://llvm.org/doxygen/" target="_blank" rel="noopener">LLVM doxygen tree</a></li></ul>]]></content>
+    <content type="html"><![CDATA[<p>这是一篇关于如何在Windows平台下使用LLVM的文章，由tajpure转述自 <a href="http://llvm.org/docs/GettingStartedVS.html#id2" target="_blank" rel="noopener">LLVM官网</a>.</p><p>##概述##<br>LLVM，命名最早取自底层虚拟机器（Low Level Virtual Machine）的缩写。由很多项目组成，它是一个编译器的基础框架，提供完整的编译系统中间层。使用Visual Studio而不是使用mingw或cygwin来编译LLVM。这是因为vc能编译出更原生的程序，只依赖于VC的dll。<br><a id="more"></a></p><p>##依赖##<br>在你开始使用LLVM系统时，你需要看一下如下依赖。提前了解你需要的硬件和软件，会使你的麻烦减少。</p><p>###硬件要求###</p><p>1、一个能够良好运行Visual Studio2012的系统</p><p>2、LLVM的安装将会占用3GB左右的空间</p><p>###软件要求###</p><p>1、Visual Studio 2012及更高版本</p><p>2、<a href="http://www.cmake.org/" target="_blank" rel="noopener">CMake</a>，用它来产生LLVM最新的项目文件</p><p>3、如果你想运行LLVM测试文件，你需要安装<a href="http://www.python.org/" target="_blank" rel="noopener">Python</a>（2.4-2.7版本测试可运行）、<a href="http://gnuwin32.sourceforge.net/" target="_blank" rel="noopener">DnuWin32</a></p><p>4、不要安装LLVM在目录名包含空格的目录下，这会导致配置失败</p><p>##开始##<br>下面是快速开始使用LLVM的一份简短实例：</p><p>1、阅读文档</p><p>2、认真地再读一遍文档</p><p>3、记住你已经被两次提醒去阅读文档</p><p>4、获取LLVM源码</p><ul><li>通过下载的文件获取<ul><li>cd <where-you-want-llvm-to-live></where-you-want-llvm-to-live></li><li>gunzip –stdout llvm-VERSION.tar.gz | tar -xvf -(or use WinZip)</li><li>cd llvm</li></ul></li><li>通过匿名SVN获取<ul><li>cd <where-you-want-llvm-to-live></where-you-want-llvm-to-live></li><li>svn co <a href="http://llvm.org/svn/llvm-project/llvm/trunk" target="_blank" rel="noopener">http://llvm.org/svn/llvm-project/llvm/trunk</a> llvm</li><li>cd llvm </li></ul></li><li>通过Git获取<ul><li>cd <where-you-want-llvm-to-live></where-you-want-llvm-to-live></li><li>git clone <a href="http://llvm.org/git/llvm.git" target="_blank" rel="noopener">http://llvm.org/git/llvm.git</a></li></ul></li></ul><p>5、使用CMake产生LLVM最新的项目文件：</p><ul><li><p>CMake安装完成后。CMake最简单的使用方法是通过CMake的图形界面使用。你可以选择一个目录，将LLVM解压到其中（推荐使用默认选项）。</p></li><li><p>查看<a href="http://llvm.org/docs/CMake.html" target="_blank" rel="noopener">LLVM CMake 导航</a>获取更多信息关于如何去配置LLVM编译</p></li><li><p>CMake为所有的构建类型产生项目文件。要选择一个特殊的构建类型，你可以使用VS IDE的配置管理器，或者当使用MSBuild时，你也可以使用/property:Configuration 命令行选项。</p></li></ul><p>6、启动 Visual Studio</p><ul><li>在你所创建的项目文件中，你会发现llvm.sln，双击它打开Visual Studio</li></ul><p>7、编译LLVM组件</p><ul><li><p>这个项目可能会仍然可能会被单独构建，但构建他们时不要仅仅选择让他们全部批量构建，而是选择并且构建需要全部构建的项目去全部构建。</p></li><li><p>Fibonacci项目是一个使用JIT的例子程序。修改项目的调试属性去提供一个数字化的命令行参数或者在命令行里运行它。这个程序将会打印绑定的fibonacci值</p></li></ul><p>8、在 Visual Studio 里测试LLVM</p><ul><li><p>如果%PATH%不包含CnuWin32，你能够在CMake上指定 LLVM_LIT_TOOLS_DIR 作为给GnuWin32的路径</p></li><li><p>你能够仅仅在构建项目“check”时运行LLVM 测试。测试结果将会展示在VS的输出窗口里。</p></li></ul><p>9、在命令行里测试LLVM</p><ul><li>LLVM测试能够运行通过改变目录至LLVM源码目录并运行如下命令：</li></ul><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">C:\..\llvm&gt; python ..\build\bin\llvm-lit --param build_config=Win32 --param build_mode=Debug --param llvm_site_config=../build/test/lit.site.cfg test</span><br></pre></td></tr></table></figure><p>上述例子假定Python已经在你的Path变量里了，你已经构建了一个LLVM的Win32调试版本通过一个行构建的标准输出。你不会看到任何不可预见的失败提示，但是会看到许多不支持测试和可预见的失败提示。<br>一个特殊的测试或测试目录能够被运行如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">C:\..\llvm&gt; python ..\build\bin\llvm-lit --param build_config=Win32 --param build_mode=Debug --param llvm_site_config=../build/test/lit.site.cfg test/path/to/test</span><br></pre></td></tr></table></figure></p><p>##一个使用LLVM工具链的示例##</p><p>1、首先，创建一个简单的C文件，命名为’hello.c’</p><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  <span class="built_in">printf</span>(<span class="string">"hello world\n"</span>);</span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>2、接着，将这个C文件编译为LLVM字节码文件</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">C:\..&gt; clang -c hello.c -emit-llvm -o hello.bc</span><br></pre></td></tr></table></figure><p>这样将会创建一个结果文件hello.bc。你能够直接使用lli工具执行这个文件，llc工具编译它成为本地汇编代码，优化它通过opt工具，等等。<br>另外，你能够直接输出一个可执行文件通过clang：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">C:\..&gt; clang hello.c -o hello.exe</span><br></pre></td></tr></table></figure></p><p>3、使用实时编译器运行程序：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">C:\..&gt; lli hello.bc</span><br></pre></td></tr></table></figure></p><p>4、使用llvm-dis实用工具去查看LLVM汇编代码：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">C:\..&gt; llvm-dis &lt; hello.bc | more</span><br></pre></td></tr></table></figure></p><p>5、使用LLC代码生成器编译程序成object code<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">C:\..&gt; llc -filetype=obj hello.bc</span><br></pre></td></tr></table></figure></p><p>6、使用Microsoft链接链接成二进制：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">C:\..&gt; link hello.obj -defaultlib:libcmt</span><br></pre></td></tr></table></figure></p><p>7、执行可执行程序：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">C:\..&gt; hello.exe</span><br></pre></td></tr></table></figure></p><p>##链接##</p><ul><li><a href="http://llvm.org/" target="_blank" rel="noopener">LLVM homepage</a></li><li><a href="http://llvm.org/doxygen/" target="_blank" rel="noopener">LLVM doxygen tree</a></li></ul>]]></content>
     
     <summary type="html">
     
@@ -152,79 +61,20 @@
   </entry>
   
   <entry>
-    <title>八月二十五日诸事记</title>
-    <link href="https://tajpure.com/2014/08/25/%E5%85%AB%E6%9C%88%E4%BA%8C%E5%8D%81%E4%BA%94%E6%97%A5%E8%AF%B8%E4%BA%8B%E8%AE%B0/"/>
-    <id>https://tajpure.com/2014/08/25/八月二十五日诸事记/</id>
-    <published>2014-08-25T12:17:00.000Z</published>
-    <updated>2019-07-05T01:55:22.000Z</updated>
-    
-    <content type="html"><![CDATA[<p>第一件事：<br>由于正在参与开发编译器。今天了解了一下LLVM，官方给出的文档比较清晰简单，用来实现定制编译器确实是一个很好的选择。编译号称计算机三大显学之一, 我一直对编译原理很感兴趣,这次可以藉这个机会提高自己对于程序语言的认识。<a id="more"></a></p><p>第二件事：<br>我竟然将C盘删掉了，虽然windows等几个目录还部分得以保留，但几乎已经是不能使用了。使用文件恢复软件后，大部分恢复的文件没有目录，全部挤在C的根目录下,相当于没用。虽然现在windows用的不多，但也有时候需要使用，只能硬著头皮去重装系统了。以后删除文件切忌使用delete键。</p><p>第三件事：<br>博客前端界面决定先使用别人的界面（light），自己的博客前端暂时搁置。</p>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;第一件事：&lt;br&gt;由于正在参与开发编译器。今天了解了一下LLVM，官方给出的文档比较清晰简单，用来实现定制编译器确实是一个很好的选择。编译号称计算机三大显学之一, 我一直对编译原理很感兴趣,这次可以藉这个机会提高自己对于程序语言的认识。
-    
-    </summary>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>博客界面更新</title>
-    <link href="https://tajpure.com/2014/07/26/%E5%8D%9A%E5%AE%A2%E7%95%8C%E9%9D%A2%E6%9B%B4%E6%96%B0/"/>
-    <id>https://tajpure.com/2014/07/26/博客界面更新/</id>
-    <published>2014-07-25T16:04:25.000Z</published>
-    <updated>2019-07-05T01:55:22.000Z</updated>
-    
-    <content type="html"><![CDATA[<p>今天晚上抽了点时间更新了一下博客的界面。简单的白底黑字界面感觉整体上还是十分清爽的，是我想要的风格。看了一下时间，十二点刚过，突然发现今天忘记更新一下longest streak了，呃，好象是昨天了- -||。虽然也没什么要紧，但是好不容易坚持这么多天的东西就这么断掉了，真是有点可惜。下次，再接再厉吧。有点走题了，这篇文应该是对该博客未来设计做一个简单的规划的。<br><a id="more"></a><br>首先，至今为止已经完成了整个博客大体上的搭建。由于发现静态博客的便捷，于是果断放弃自己设计动态博客后端，而采用简单强大的hexo。接下来的就是做博客的界面了，因为比较崇尚简洁，因此把自己认为不需要的东西全部清除。</p><p>大概的计划如下：</p><p>1，logo 标志必不可少；<br>2，最新 最新发布的文章；<br>3，列表 按某种排序规则（时间或其它）建立的一个索引列表；<br>4，关于 主人介绍也必不可少；<br>5，标签（待定）目前感觉没什么用，反正就我一个人看 -_-；<br>6，rss(待定）理由同上，不过支持rss还是一件很有节操的事情；<br>7，评论（待定） 理由也同上，真是对自己太没信心了…<br>8，多语言（待定） 作为时刻与国际接轨的cser,最起码应该支持英文；<br>9，文章展示 这个最重要，所以放在最后。博客不就是展示文章的吗？效果要满足无形胜有形，内容最重要嘛！读者的注意力能全部集中于内容本身才是我要的效果！</p><p>大致规划如上所示，首先将前四个做好（因为比较简单），再根据当前需求选择实现待定部分；“文章展示”与其它八个并行进行，实时调整，毕竟“无形胜有形”是需要很长时间领悟的。</p>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;今天晚上抽了点时间更新了一下博客的界面。简单的白底黑字界面感觉整体上还是十分清爽的，是我想要的风格。看了一下时间，十二点刚过，突然发现今天忘记更新一下longest streak了，呃，好象是昨天了- -||。虽然也没什么要紧，但是好不容易坚持这么多天的东西就这么断掉了，真是有点可惜。下次，再接再厉吧。有点走题了，这篇文应该是对该博客未来设计做一个简单的规划的。&lt;br&gt;
-    
-    </summary>
-    
-    
-      <category term="本博客" scheme="https://tajpure.com/tags/%E6%9C%AC%E5%8D%9A%E5%AE%A2/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>使用JavaParser进行java源码解析</title>
-    <link href="https://tajpure.com/2014/02/11/%E4%BD%BF%E7%94%A8JavaParser%E8%BF%9B%E8%A1%8Cjava%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/"/>
-    <id>https://tajpure.com/2014/02/11/使用JavaParser进行java源码解析/</id>
-    <published>2014-02-11T01:25:36.000Z</published>
-    <updated>2019-07-05T01:55:22.000Z</updated>
-    
-    <content type="html"><![CDATA[<p>  JavaParser下载地址：<a href="http://code.google.com/p/javaparser/downloads/list" target="_blank" rel="noopener">http://code.google.com/p/javaparser/downloads/list</a></p><p>  刚开始接触的时候觉得和JDT里的Parser类不太一样。查了一下WiKi，发现它访问编译单元成员，需要调用相应子元素对应的Visitor类的visit（）方法。此方法可以通过复写来实现自己需要的功能。我需要的功能是将编译单元里的所有MethodDeclaration取出，因此利用传递句柄的方式，实现代码如下：<br><a id="more"></a></p><pre><code>public static List&lt;MethodDeclaration&gt; getMethodList(CompilationUnit cu) {     List&lt;MethodDeclaration&gt; methodList = new ArrayList&lt;MethodDeclaration&gt;();     new MethodGetterVisitor().visit(cu, methodList);     return methodList; } private static class MethodGetterVisitor extends VoidVisitorAdapter&lt;Object&gt; {     @SuppressWarnings(&quot;unchecked&quot;)     @Override     public void visit(MethodDeclaration n, Object arg) {         List&lt;MethodDeclaration&gt; methodList = new ArrayList&lt;MethodDeclaration&gt;();         methodList =  (List&lt;MethodDeclaration&gt;) arg;         methodList.add(n);     } }</code></pre><p>  官方还提供了不通过Visitor改变一个类成员方法的示例（相对Visitor更复杂）：</p><pre><code>public class MethodChanger {  public static void main(String[] args) throws Exception {     // creates an input stream for the file to be parsed     FileInputStream in = new FileInputStream(&quot;test.java&quot;);    CompilationUnit cu;     try {        // parse the file        cu = JavaParser.parse(in);     } finally {          in.close();     }    // change the methods names and parameters    changeMethods(cu);   // prints the changed compilation unit   System.out.println(cu.toString());}private static void changeMethods(CompilationUnit cu) {   List&lt;TypeDeclaration&gt; types = cu.getTypes();   for (TypeDeclaration type : types) {       List&lt;BodyDeclaration&gt; members = type.getMembers();       for (BodyDeclaration member : members) {           if (member instanceof MethodDeclaration) {               MethodDeclaration method = (MethodDeclaration) member;               changeMethod(method);           }       }   }}private static void changeMethod(MethodDeclaration n) {   // change the name of the method to upper case   n.setName(n.getName().toUpperCase());  // create the new parameter  Parameter newArg = ASTHelper.createParameter(ASTHelper.INT_TYPE, &quot;value&quot;);  // add the parameter to the method  ASTHelper.addParameter(n, newArg); }}</code></pre><p> 最后附上WiKi里给出的编译单元创建示例：</p><pre><code>public class ClassCreator { public static void main(String[] args) throws Exception {   // creates the compilation unit   CompilationUnit cu = createCU();   // prints the created compilation unit   System.out.println(cu.toString());}/*** creates the compilation unit*/private static CompilationUnit createCU() {   CompilationUnit cu = new CompilationUnit();   // set the package   cu.setPakage(new PackageDeclaration(ASTHelper.createNameExpr(&quot;java.parser.test&quot;)));   // create the type declaration    ClassOrInterfaceDeclaration type = new ClassOrInterfaceDeclaration(ModifierSet.PUBLIC, false, &quot;GeneratedClass&quot;);   ASTHelper.addTypeDeclaration(cu, type);   // create a method   MethodDeclaration method = new MethodDeclaration(ModifierSet.PUBLIC, ASTHelper.VOID_TYPE, &quot;main&quot;);   method.setModifiers(ModifierSet.addModifier(method.getModifiers(), ModifierSet.STATIC));   ASTHelper.addMember(type, method);   // add a parameter to the method   Parameter param = ASTHelper.createParameter(ASTHelper.createReferenceType(&quot;String&quot;, 0), &quot;args&quot;);   param.setVarArgs(true);   ASTHelper.addParameter(method, param);   // add a body to the method   BlockStmt block = new BlockStmt();   method.setBody(block);   // add a statement do the method body   NameExpr clazz = new NameExpr(&quot;System&quot;);   FieldAccessExpr field = new FieldAccessExpr(clazz, &quot;out&quot;);   MethodCallExpr call = new MethodCallExpr(field, &quot;println&quot;);   ASTHelper.addArgument(call, new StringLiteralExpr(&quot;Hello World!&quot;));   ASTHelper.addStmt(block, call);   return cu; }}</code></pre>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;  JavaParser下载地址：&lt;a href=&quot;http://code.google.com/p/javaparser/downloads/list&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;http://code.google.com/p/javaparser/downloads/list&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;  刚开始接触的时候觉得和JDT里的Parser类不太一样。查了一下WiKi，发现它访问编译单元成员，需要调用相应子元素对应的Visitor类的visit（）方法。此方法可以通过复写来实现自己需要的功能。我需要的功能是将编译单元里的所有MethodDeclaration取出，因此利用传递句柄的方式，实现代码如下：&lt;br&gt;
-    
-    </summary>
-    
-    
-      <category term="技术" scheme="https://tajpure.com/tags/%E6%8A%80%E6%9C%AF/"/>
-    
-  </entry>
-  
-  <entry>
     <title>Life of Pi</title>
     <link href="https://tajpure.com/2012/12/01/Life-of-Pi/"/>
     <id>https://tajpure.com/2012/12/01/Life-of-Pi/</id>
     <published>2012-12-01T08:18:39.000Z</published>
-    <updated>2019-07-05T02:41:21.000Z</updated>
+    <updated>2019-07-18T01:57:06.000Z</updated>
     
-    <content type="html"><![CDATA[<p>看完少年派之后不得不写一些东西了，酝酿了很久，一直在想这部电影究竟告诉了我些什么。很多人看电影就是仅为娱乐，最能取悦他们的电影价值最高。但我认为电影里承载的思想才是电影的价值所在，真正好的电影是可以为现实中茫然而不知所措的人们指明一条出路的。</p><p>看了很多关于少年派的影评，有大师级深刻入骨分析全片的，也有寥寥数语仅表达自己感慨的。但似乎总是觉得缺点什么，这些影评都似乎太过于着重突出这部电影，反而疏忽了这部电影的受体–观众，从而让人对这部电影的价值不甚明确。</p><p>我看电影时总是喜欢将自己与电影联系起来，在现实与电影中建立起映射，借此反思自己的人生。看少年派时，我总觉得派身上有我自己的影子，挥之不去。儿时的派是一个彻头彻尾的信教徒，而我作为一个无宗教信仰的人，对那时候的派一点感觉也没有，只是一个内心软弱，依靠信仰神灵藉以自慰的人罢了。可当第一次派被他父亲逼着亲眼目睹帕克咬死羚羊的全过程时，我开始想这便是所谓的成长吗？粗暴地打破一个孩子关于世界的美好向往便是让他尽快地成长起来吗？</p><p>当派用蹩脚的英语说着“I’m sorry”。拿着斧子向鬼头鱼砍去时，他彻彻底底地臣服于了现实。现实就是那么残酷，就算寄希望于三相神之一的毗湿奴的梦,它也还是那么残酷。派麻木地吃下一片片鱼肉，虽然这个故事已经经过了派这般的美化，可还是显得那般地残忍。他吃下的是身体赖以生存的肉，而丢下的是自己最为真挚的灵魂。</p>]]></content>
+    <content type="html"><![CDATA[<p>看完少年派之后不得不写一些东西了，酝酿了很久，一直在想这部电影究竟告诉了我些什么。很多人看电影就是仅为娱乐，最能取悦他们的电影价值最高。但我认为电影里承载的思想才是电影的价值所在，真正好的电影可以为现实中茫然而不知所措的人们指明一条出路。</p><p>看了很多关于少年派的影评，有大师级深刻入骨分析全片的，也有寥寥数语仅表达自己感慨的。但似乎总是觉得缺点什么，这些影评都似乎太过于着重突出这部电影，反而疏忽了这部电影的受体–观众，从而让人对这部电影的价值不甚明确。</p><p>我看电影时总是喜欢将自己与电影联系起来，在现实与电影中建立起映射，借此反思自己的人生。看少年派时，我总觉得派身上有我自己的影子，挥之不去。儿时的派是一个彻头彻尾的信教徒，而我作为一个无宗教信仰的人，对那时候的派一点感觉也没有，只是一个内心软弱，依靠信仰神灵藉以自慰的人罢了。可当第一次派被他父亲逼着亲眼目睹帕克咬死羚羊的全过程时，我开始想这便是所谓的成长吗？粗暴地打破一个孩子关于世界的美好向往,便是让他尽快地成长起来吗？</p><p>当派用蹩脚的英语说着“I’m sorry”。拿着斧子向鬼头鱼砍去时，他彻彻底底地臣服于了现实。现实就是那么残酷，就算寄希望于三相神之一的毗湿奴的梦,它也还是那么残酷。派麻木地吃下一片片鱼肉，虽然这个故事已经经过了派这般的美化，可还是显得那般残忍。他吃下的是身体赖以生存的肉，而丢下的是自己最为真挚的灵魂。</p>]]></content>
     
     <summary type="html">
     
       
       
-        &lt;p&gt;看完少年派之后不得不写一些东西了，酝酿了很久，一直在想这部电影究竟告诉了我些什么。很多人看电影就是仅为娱乐，最能取悦他们的电影价值最高。但我认为电影里承载的思想才是电影的价值所在，真正好的电影是可以为现实中茫然而不知所措的人们指明一条出路的。&lt;/p&gt;
-&lt;p&gt;看了很多关于少年
+        &lt;p&gt;看完少年派之后不得不写一些东西了，酝酿了很久，一直在想这部电影究竟告诉了我些什么。很多人看电影就是仅为娱乐，最能取悦他们的电影价值最高。但我认为电影里承载的思想才是电影的价值所在，真正好的电影可以为现实中茫然而不知所措的人们指明一条出路。&lt;/p&gt;
+&lt;p&gt;看了很多关于少年派的
       
     
     </summary>

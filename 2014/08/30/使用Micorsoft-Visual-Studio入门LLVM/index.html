@@ -3,20 +3,20 @@
 <head><meta name="generator" content="Hexo 3.9.0">
   <meta charset="utf-8">
   
-  <title>使用Micorsoft Visual Studio入门LLVM | TAJPURE</title>
+  <title>使用 Micorsoft Visual Studio 入门 LLVM | TAJPURE</title>
   <meta name="mobile-web-app-capable" content="yes">
   <meta name="viewport" content="width=device-width">
   <meta name="description" content="这是一篇关于如何在Windows平台下使用LLVM的文章，由tajpure转述自 LLVM官网. ##概述##LLVM，命名最早取自底层虚拟机器（Low Level Virtual Machine）的缩写。由很多项目组成，它是一个编译器的基础框架，提供完整的编译系统中间层。使用Visual Studio而不是使用mingw或cygwin来编译LLVM。这是因为vc能编译出更原生的程序，只依赖于VC">
 <meta name="keywords" content="技术">
 <meta property="og:type" content="article">
-<meta property="og:title" content="使用Micorsoft Visual Studio入门LLVM">
+<meta property="og:title" content="使用 Micorsoft Visual Studio 入门 LLVM">
 <meta property="og:url" content="https://tajpure.com/2014/08/30/使用Micorsoft-Visual-Studio入门LLVM/index.html">
 <meta property="og:site_name" content="TAJPURE">
 <meta property="og:description" content="这是一篇关于如何在Windows平台下使用LLVM的文章，由tajpure转述自 LLVM官网. ##概述##LLVM，命名最早取自底层虚拟机器（Low Level Virtual Machine）的缩写。由很多项目组成，它是一个编译器的基础框架，提供完整的编译系统中间层。使用Visual Studio而不是使用mingw或cygwin来编译LLVM。这是因为vc能编译出更原生的程序，只依赖于VC">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-07-05T01:55:22.000Z">
+<meta property="og:updated_time" content="2019-07-18T01:57:59.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="使用Micorsoft Visual Studio入门LLVM">
+<meta name="twitter:title" content="使用 Micorsoft Visual Studio 入门 LLVM">
 <meta name="twitter:description" content="这是一篇关于如何在Windows平台下使用LLVM的文章，由tajpure转述自 LLVM官网. ##概述##LLVM，命名最早取自底层虚拟机器（Low Level Virtual Machine）的缩写。由很多项目组成，它是一个编译器的基础框架，提供完整的编译系统中间层。使用Visual Studio而不是使用mingw或cygwin来编译LLVM。这是因为vc能编译出更原生的程序，只依赖于VC">
   
     <link rel="alternative" href="/atom.xml" title="TAJPURE" type="application/atom+xml">
@@ -77,7 +77,7 @@
 		
   
     <h1 class="article-title entry-title" itemprop="name">
-      使用Micorsoft Visual Studio入门LLVM
+      使用 Micorsoft Visual Studio 入门 LLVM
     </h1>
   
 
@@ -155,7 +155,7 @@
 <p>上述例子假定Python已经在你的Path变量里了，你已经构建了一个LLVM的Win32调试版本通过一个行构建的标准输出。你不会看到任何不可预见的失败提示，但是会看到许多不支持测试和可预见的失败提示。<br>一个特殊的测试或测试目录能够被运行如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">C:\..\llvm&gt; python ..\build\bin\llvm-lit --param build_config=Win32 --param build_mode=Debug --param llvm_site_config=../build/test/lit.site.cfg test/path/to/test</span><br></pre></td></tr></table></figure></p>
 <p>##一个使用LLVM工具链的示例##</p>
 <p>1、首先，创建一个简单的C文件，命名为’hello.c’</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">"hello world\n"</span>);</span><br><span class="line"><span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  <span class="built_in">printf</span>(<span class="string">"hello world\n"</span>);</span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>2、接着，将这个C文件编译为LLVM字节码文件</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">C:\..&gt; clang -c hello.c -emit-llvm -o hello.bc</span><br></pre></td></tr></table></figure>
 <p>这样将会创建一个结果文件hello.bc。你能够直接使用lli工具执行这个文件，llc工具编译它成为本地汇编代码，优化它通过opt工具，等等。<br>另外，你能够直接输出一个可执行文件通过clang：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">C:\..&gt; clang hello.c -o hello.exe</span><br></pre></td></tr></table></figure></p>
@@ -176,21 +176,21 @@
     
 <nav id="article-nav">
   
-    <a href="/2014/09/09/Vimium的简单试用/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2015/11/08/ubuntu-dual-screen/" id="article-nav-newer" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Newer</strong>
       <div class="article-nav-title">
         
-          Vimium的简单试用
+          Ubuntu 双显示器
         
       </div>
     </a>
   
   
-    <a href="/2014/08/25/八月二十五日诸事记/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2012/12/01/Life-of-Pi/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
       <div class="article-nav-title">
         
-          八月二十五日诸事记
+          Life of Pi
         
       </div>
     </a>
