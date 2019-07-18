@@ -83,15 +83,15 @@
 	<div class="mdl-card__supporting-text" style="margin-top: -1em">
 		
     	<p>这是一篇关于如何在Windows平台下使用LLVM的文章，由tajpure转述自 <a href="http://llvm.org/docs/GettingStartedVS.html#id2" target="_blank" rel="noopener">LLVM官网</a>.</p>
-<h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>LLVM，命名最早取自底层虚拟机器（Low Level Virtual Machine）的缩写。由很多项目组成，它是一个编译器的基础框架，提供完整的编译系统中间层。使用Visual Studio而不是使用mingw或cygwin来编译LLVM。这是因为vc能编译出更原生的程序，只依赖于VC的dll。</p>
-<h2 id="依赖"><a href="#依赖" class="headerlink" title="依赖"></a>依赖</h2><p>在你开始使用LLVM系统时，你需要看一下如下依赖。提前了解你需要的硬件和软件，会使你的麻烦减少。</p>
-<h3 id="硬件要求"><a href="#硬件要求" class="headerlink" title="硬件要求"></a>硬件要求</h3><p>1、一个能够良好运行Visual Studio2012的系统</p>
+<h4 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h4><p>LLVM，命名最早取自底层虚拟机器（Low Level Virtual Machine）的缩写。由很多项目组成，它是一个编译器的基础框架，提供完整的编译系统中间层。使用Visual Studio而不是使用mingw或cygwin来编译LLVM。这是因为vc能编译出更原生的程序，只依赖于VC的dll。</p>
+<h4 id="依赖"><a href="#依赖" class="headerlink" title="依赖"></a>依赖</h4><p>在你开始使用LLVM系统时，你需要看一下如下依赖。提前了解你需要的硬件和软件，会使你的麻烦减少。</p>
+<h5 id="硬件要求"><a href="#硬件要求" class="headerlink" title="硬件要求"></a>硬件要求</h5><p>1、一个能够良好运行Visual Studio2012的系统</p>
 <p>2、LLVM的安装将会占用3GB左右的空间</p>
-<h3 id="软件要求"><a href="#软件要求" class="headerlink" title="软件要求"></a>软件要求</h3><p>1、Visual Studio 2012及更高版本</p>
+<h5 id="软件要求"><a href="#软件要求" class="headerlink" title="软件要求"></a>软件要求</h5><p>1、Visual Studio 2012及更高版本</p>
 <p>2、<a href="http://www.cmake.org/" target="_blank" rel="noopener">CMake</a>，用它来产生LLVM最新的项目文件</p>
 <p>3、如果你想运行LLVM测试文件，你需要安装<a href="http://www.python.org/" target="_blank" rel="noopener">Python</a>（2.4-2.7版本测试可运行）、<a href="http://gnuwin32.sourceforge.net/" target="_blank" rel="noopener">DnuWin32</a></p>
 <p>4、不要安装LLVM在目录名包含空格的目录下，这会导致配置失败</p>
-<h2 id="开始"><a href="#开始" class="headerlink" title="开始"></a>开始</h2><p>下面是快速开始使用LLVM的一份简短实例：</p>
+<h4 id="开始"><a href="#开始" class="headerlink" title="开始"></a>开始</h4><p>下面是快速开始使用LLVM的一份简短实例：</p>
 <p>1、阅读文档</p>
 <p>2、认真地再读一遍文档</p>
 <p>3、记住你已经被两次提醒去阅读文档</p>
@@ -148,7 +148,7 @@
 </ul>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">C:\..\llvm&gt; python ..\build\bin\llvm-lit --param build_config=Win32 --param build_mode=Debug --param llvm_site_config=../build/test/lit.site.cfg test</span><br></pre></td></tr></table></figure>
 <p>上述例子假定Python已经在你的Path变量里了，你已经构建了一个LLVM的Win32调试版本通过一个行构建的标准输出。你不会看到任何不可预见的失败提示，但是会看到许多不支持测试和可预见的失败提示。<br>一个特殊的测试或测试目录能够被运行如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">C:\..\llvm&gt; python ..\build\bin\llvm-lit --param build_config=Win32 --param build_mode=Debug --param llvm_site_config=../build/test/lit.site.cfg test/path/to/test</span><br></pre></td></tr></table></figure></p>
-<h2 id="一个使用LLVM工具链的示例"><a href="#一个使用LLVM工具链的示例" class="headerlink" title="一个使用LLVM工具链的示例"></a>一个使用LLVM工具链的示例</h2><p>1、首先，创建一个简单的C文件，命名为’hello.c’</p>
+<h4 id="一个使用LLVM工具链的示例"><a href="#一个使用LLVM工具链的示例" class="headerlink" title="一个使用LLVM工具链的示例"></a>一个使用LLVM工具链的示例</h4><p>1、首先，创建一个简单的C文件，命名为’hello.c’</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  <span class="built_in">printf</span>(<span class="string">"hello world\n"</span>);</span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>2、接着，将这个C文件编译为LLVM字节码文件</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">C:\..&gt; clang -c hello.c -emit-llvm -o hello.bc</span><br></pre></td></tr></table></figure>
@@ -158,7 +158,7 @@
 <p>5、使用LLC代码生成器编译程序成object code<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">C:\..&gt; llc -filetype=obj hello.bc</span><br></pre></td></tr></table></figure></p>
 <p>6、使用Microsoft链接链接成二进制：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">C:\..&gt; link hello.obj -defaultlib:libcmt</span><br></pre></td></tr></table></figure></p>
 <p>7、执行可执行程序：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">C:\..&gt; hello.exe</span><br></pre></td></tr></table></figure></p>
-<h2 id="链接"><a href="#链接" class="headerlink" title="链接"></a>链接</h2><ul>
+<h4 id="链接"><a href="#链接" class="headerlink" title="链接"></a>链接</h4><ul>
 <li><a href="http://llvm.org/" target="_blank" rel="noopener">LLVM homepage</a></li>
 <li><a href="http://llvm.org/doxygen/" target="_blank" rel="noopener">LLVM doxygen tree</a></li>
 </ul>
