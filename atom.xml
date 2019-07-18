@@ -3,7 +3,7 @@
   <title>TAJPURE</title>
   <icon>https://www.gravatar.com/avatar/989b8c8f5e2ee73ea1d6e95475e40898</icon>
   
-  <link href="/atom.xml" rel="self"/>
+  <link href="/test/atom.xml" rel="self"/>
   
   <link href="https://tajpure.com/"/>
   <updated>2019-07-18T01:58:17.000Z</updated>
