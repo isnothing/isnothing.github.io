@@ -114,7 +114,7 @@
 	</div>
 	<div class="mdl-card__supporting-text" style="margin-top: -1em">
 		
-    	<p>这是一篇关于如何在Windows平台下使用 LLVM 的文章，由 tajpure 转述自 <a href="http://llvm.org/docs/GettingStartedVS.html#id2" target="_blank" rel="noopener">LLVM 官网</a>.</p>
+    	<p>这是一篇关于如何在 Windows 平台下使用 LLVM 的文章，由 tajpure 转述自 <a href="http://llvm.org/docs/GettingStartedVS.html#id2" target="_blank" rel="noopener">LLVM 官网</a>.</p>
 <h4 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h4><p>LLVM，命名最早取自底层虚拟机器（Low Level Virtual Machine）的缩写。由很多项目组成，它是一个编译器的基础框架，提供完整的编译系统中间层。使用 Visual Studio 而不是使用 mingw 或 cygwin 来编译 LLVM。这是因为 vc 能编译出更原生的程序，只依赖于 VC 的 dll。</p>
 <h4 id="依赖"><a href="#依赖" class="headerlink" title="依赖"></a>依赖</h4><p>在你开始使用 LLVM 系统时，你需要看一下如下依赖。提前了解你需要的硬件和软件，会使你的麻烦减少。</p>
 <h5 id="硬件要求"><a href="#硬件要求" class="headerlink" title="硬件要求"></a>硬件要求</h5><p>1、一个能够良好运行 Visual Studio2012 的系统</p>
@@ -136,9 +136,11 @@
 </ul>
 </li>
 <li>通过匿名 SVN 获取<ul>
-<li>cd <where-you-want-llvm-to-live></where-you-want-llvm-to-live></li>
-<li>svn co <a href="http://llvm.org/svn/llvm-project/llvm/trunk" target="_blank" rel="noopener">http://llvm.org/svn/llvm-project/llvm/trunk</a> llvm</li>
+<li>cd <where-you-want-llvm-to-live><ul>
+<li>svn co <a href="http://llvm.orgg/svn/llvm-project/llvm/trunk" target="_blank" rel="noopener">http://llvm.orgg/svn/llvm-project/llvm/trunk</a> llvm</li>
 <li>cd llvm </li>
+</ul>
+</where-you-want-llvm-to-live></li>
 </ul>
 </li>
 <li>通过 Git 获取<ul>
